@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/activity_wifi_set"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+
+    <TextView
+        android:id="@+id/tv_wifi_title"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:gravity="center"
+        android:text="网络设置"
+        android:textColor="#5ebdce"
+        android:textSize="28sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#5ebdce"/>
+
+    <TextView
+        android:id="@+id/tv_select_wifi"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:drawableLeft="@drawable/icon_wifi_connect"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:text=""
+        android:textColor="#333333"
+        android:textSize="22sp"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#f3f3f3"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:text="选择网络"
+            android:textColor="#8f8f8f"
+            android:textSize="22sp"/>
+
+        <TextView
+            android:id="@+id/tv_refresh_wifi"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|right"
+            android:gravity="center"
+            android:text="刷新"
+            android:textColor="#4DB6BE"
+            android:textSize="22sp"/>
+    </FrameLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_wifi_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:overScrollMode="never"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        tools:listitem="@layout/item_wifi_list"/>
+
+
+</LinearLayout>

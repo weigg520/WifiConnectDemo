@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WifiConnectDemo</string>
+
+    <!--wifi设置-->
+    <string name="select_wifi">请选择WIFI连接</string>
+
+</resources>

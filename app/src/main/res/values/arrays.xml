@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--wifi链接状态-->
+    <string-array name="wifi_status">
+        <item>&#160;</item>
+        <item>"正在扫描..."</item>
+        <item>"正在连接..."</item>
+        <item>"正在进行身份验证..."</item>
+        <item>"正在获取 IP 地址..."</item>
+        <item>"已连接"</item>
+        <item>"已暂停"</item>
+        <item>"正在断开连接..."</item>
+        <item>"已断开连接"</item>
+        <item>"失败"</item>
+        <item>"已阻止"</item>
+        <item>"暂时关闭状况不佳的连接"</item>
+    </string-array>
+</resources>

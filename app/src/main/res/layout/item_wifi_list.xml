@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="42dp"
+             android:background="@drawable/item_bg_selector">
+    G:\WorkRepositoryDirectory\RobotEduPad\eduapp\src\main\res\layout\item_wifi_list.xml
+    <TextView
+        android:layout_gravity="center_vertical"
+        android:id="@+id/tv_wifi_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLength="20"
+        android:text="wmhope11"
+        android:textColor="#666666"
+        android:textSize="22sp"/>
+
+    <TextView
+        android:id="@+id/tv_wifi_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|right"
+        android:drawablePadding="11dp"
+        android:drawableRight="@drawable/icon_lock_wifi_4"
+        android:maxLength="20"
+        android:text="已保存"
+        android:textColor="#666666"
+        android:textSize="18sp"/>
+
+</FrameLayout>
