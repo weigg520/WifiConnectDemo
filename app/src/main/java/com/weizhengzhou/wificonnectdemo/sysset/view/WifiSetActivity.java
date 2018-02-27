@@ -1,5 +1,6 @@
 package com.weizhengzhou.wificonnectdemo.sysset.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -208,6 +209,7 @@ public class WifiSetActivity
 							@Override
 							public void run() {
 								mTvSelectWifi.setText(TextUtils.isEmpty(finalScanResult.SSID) ? "" : finalScanResult.SSID);
+								mDialog.dismiss();
 							}
 						});
 					}
@@ -302,23 +304,38 @@ public class WifiSetActivity
 	public void onWifiEnable() {
 		ThreadManager.getNormalPool().execute(mWifiTask);
 		Log.e(TAG , "网络可用");
-
 	}
 
 	@Override
 	public void onWifiDisable() {
+		mDialog.updateTips(9);
 		Log.e(TAG , "网络不可用");
 	}
 
+	int i = 0;
 	@Override
 	public void onNetState(NetworkInfo info) {
-		Log.e(TAG , "网咯连接信息");
+		Log.e(TAG , "网咯连接信息" + info.getType() + "/"+ info.getSubtype() + "/" + info.describeContents() + "/" + i++);
 		//Toast.makeText(WifiSetActivity.this,"info:" + info.getType() , Toast.LENGTH_SHORT).show();
 	}
 
+	@SuppressLint("WrongConstant")
 	@Override
 	public void onWifiState(Object o) {
-		Log.e(TAG , "wifi状态:" + o.toString());
+		if (o instanceof WifiInfo){
+			WifiInfo info = (WifiInfo)o;
+			Log.e(TAG , "wifi状态");
+		}else if (o instanceof SupplicantState){
+			SupplicantState state = (SupplicantState)o;
+			switch (state){
+				case SCANNING:
+					mDialog.updateTips(1);
+					break;
+				case COMPLETED:
+					mDialog.updateTips(5);
+					break;
+			}
+		}
 	}
 
 	private WifiConnectDialog mWifiConnectDialog;
@@ -333,12 +350,16 @@ public class WifiSetActivity
 	@Override
 	public void onConnectNoPassword(WifiBean bean, int position) {
 		Log.e(TAG , "开放网咯");
+		mDialog.show();
 	}
 
 	@Override
 	public void onConfig(WifiBean bean, int position) {
 		Log.e(TAG , "连接已经配置好的网咯");
-		mLinkWifi.ConnectToNetID(position);
+		WifiConfiguration configuration = mLinkWifi.IsExsits(bean.getWifiInfo().SSID);
+		mLinkWifi.setMaxPriority(configuration);
+		mLinkWifi.ConnectToNetID(configuration.networkId);
+		mDialog.show();
 	}
 
 	@Override
@@ -374,8 +395,10 @@ public class WifiSetActivity
 
 	@Override
 	public void onWifiConnect(WifiBean bean , String wPassWord) {
-		mLinkWifi.CreateWifiInfo2(bean.getWifiInfo() , wPassWord);
 		mWifiConnectDialog.cancel();
 		mWifiConnectDialog.dismiss();
+		mDialog.show();
+		int netIp = mLinkWifi.CreateWifiInfo2(bean.getWifiInfo() , wPassWord);
+		mLinkWifi.ConnectToNetID(netIp);
 	}
 }

@@ -349,4 +349,10 @@ public class LinkWifi {
 		return results;
 	}
 
+	// 断开指定ID的网络
+	public void disConnectionWifi(int netId) {
+		wifimanager.disableNetwork(netId);
+		wifimanager.disconnect();
+	}
+
 }

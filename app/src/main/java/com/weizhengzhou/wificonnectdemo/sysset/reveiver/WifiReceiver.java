@@ -9,6 +9,7 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Parcelable;
+import android.util.Log;
 
 
 import java.lang.ref.WeakReference;
@@ -102,8 +103,13 @@ public class WifiReceiver
             if (mListener != null) {
                 mListener.onWifiEnable();
             }
-        } else if (WifiManager.SUPPLICANT_STATE_CHANGED_ACTION.equals(action)) {//正在获得IP地址
+        } else if (WifiManager.SUPPLICANT_STATE_CHANGED_ACTION.equals(action)) {
+            //正在获得IP地址
             SupplicantState state = (SupplicantState) intent.getParcelableExtra(WifiManager.EXTRA_NEW_STATE);
+            Log.e(TAG , "广播:" + state);
+            if (null != mListener){
+                mListener.onWifiState(state);
+            }
             //密码错误
             int code = intent.getIntExtra(WifiManager.EXTRA_SUPPLICANT_ERROR, 0);
             if (code == WifiManager.ERROR_AUTHENTICATING) {
@@ -122,6 +128,7 @@ public class WifiReceiver
 
         } else if (action.equals(WifiManager.WIFI_STATE_CHANGED_ACTION)) {
             int    wifiState = intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, 0);
+            Log.e(TAG ,"wifi 状态 " + wifiState);
             String tip       = "";
             switch (wifiState) {
                 case WifiManager.WIFI_STATE_ENABLING:
